@@ -1,0 +1,124 @@
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<tarefa> minhas_tarefas = Metodos.emitirtarefas();
+
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite 1 para inserir uma tarefa ou 2 para ver as tarefas ja registradas");
+        String opcaoacao = sc.nextLine();
+
+        while(!opcaoacao.equals("1") && !opcaoacao.equals("2")){
+            System.out.println("Digite um valor valido");
+            opcaoacao= sc.nextLine();
+        }
+
+
+        if (opcaoacao.equals("1")){
+            String nome, descricao,datatermino;
+            System.out.println("Digite o nome do tarefa");
+            nome = sc.nextLine();
+            System.out.println("Digite a descricao do tarefa");
+            descricao = sc.nextLine();
+            System.out.println("Digite a data de termino da tarefa (dia/mes/ano)");
+            datatermino = sc.nextLine();
+
+            System.out.println("Digite a categoria da tarefa: 1 para trabalho, 2 para lazer e 3 para hobbyes");
+            String opcaocategoria = sc.nextLine();
+
+            while(!opcaocategoria.equals("1") && !opcaocategoria.equals("2") && !opcaocategoria.equals("3")){
+                System.out.println("Digite um valor valido");
+                opcaocategoria = sc.nextLine();
+            }
+
+            System.out.println("Digite um valor de prioridade de 1 a 5 , sendo 1 menos urgente e 5 mais urgente");
+            String opcaoprioridade = sc.nextLine();
+
+            while(!List.of("1","2","3","4","5").contains(opcaoprioridade)) {
+                System.out.println("Insira um valor válido");
+                opcaoprioridade=sc.nextLine();
+
+            }
+
+            System.out.println("Digite o status atual da tarefa 1 para to Do 2 para Doing e 3 para Done");
+            String opcaostatusatual = sc.nextLine();
+
+            while(!List.of("1","2","3").contains(opcaostatusatual)) {
+                System.out.println("Insira um valor válido");
+                opcaostatusatual=sc.nextLine();
+
+            }
+
+            tarefa tarefacriada= new tarefa (nome, descricao , datatermino , opcaocategoria,opcaostatusatual,(opcaoprioridade));
+            System.out.println("Tarefa registrada com sucesso");
+            minhas_tarefas.add(tarefacriada);
+            Metodos.atualiza_arquivo(minhas_tarefas);
+
+            sc.close();
+
+
+        }
+
+        else{
+
+            System.out.println("Defina o Método de : 1 categoria, 2 status , 3 prioridade");
+            String opcaovisu = sc.nextLine();
+            while(!List.of("1","2","3").contains(opcaovisu)) {
+                System.out.println("Insira um valor válido");
+                opcaovisu=sc.nextLine();
+
+            }
+
+            List<tarefa> impressao=new ArrayList<>();
+
+            switch (opcaovisu){
+                case "1":
+                    impressao=Metodos.organizador(minhas_tarefas,"categoria");
+                    break;
+                case "2" :
+                    impressao=Metodos.organizador(minhas_tarefas,"status");
+                    break;
+                case "3":
+                    impressao=Metodos.organizador(minhas_tarefas,"prioridade");
+            }
+
+            if (impressao.isEmpty()){
+                System.out.println("Nenhuma tarefa foi encontrada");
+            }
+
+            else{
+                System.out.println("==============================");
+                System.out.println("     TAREFAS ENCONTRADAS      ");
+                System.out.println("=============================");
+
+                int i=1;
+                for (tarefa tarefa : impressao) {
+                    System.out.println("Tarefa: "+ i++);
+                    System.out.println("Nome: " + tarefa.getNome());
+                    System.out.println("Descricao: " + tarefa.getDescricao());
+                    System.out.println("Categoria: " + tarefa.getCategoria());
+                    System.out.println("Status: " + tarefa.getStatus());
+                    System.out.println("Prioridade: " + tarefa.getPrioridade());
+                    System.out.println("data fim:" + tarefa.getDatatermino());
+                    System.out.println();
+                }
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+    }
+}

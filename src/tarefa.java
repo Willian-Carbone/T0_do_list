@@ -1,0 +1,47 @@
+public class tarefa {
+    private String nome;
+    private String descricao;
+    private String datatermino;
+    private String categoria;
+    private String status;
+    private String prioridade; // Mantive String para alinhar com seu código atual
+
+    public tarefa(String nome, String descricao, String datatermino, String categoria, String status, String prioridade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.datatermino = datatermino;
+        this.prioridade = prioridade;
+
+
+        this.categoria = traduzirCategoria(categoria);
+
+
+        this.status = traduzirStatus(status);
+    }
+
+    private String traduzirCategoria(String valor) {
+        return switch (valor) {
+            case "1", "trabalho" -> "trabalho";
+            case "2", "lazer" -> "lazer";
+            case "3", "hobbyes" -> "hobbyes";
+            default -> valor; //
+        };
+    }
+
+    private String traduzirStatus(String valor) {
+        return switch (valor) {
+            case "1", "To DO" -> "To DO";
+            case "2", "Doing" -> "Doing";
+            case "3", "Done" -> "Done";
+            default -> valor;
+        };
+    }
+
+
+    public String getNome() { return nome; }
+    public String getDescricao() { return descricao; }
+    public String getDatatermino() { return datatermino; }
+    public String getCategoria() { return categoria; }
+    public String getStatus() { return status; }
+    public String getPrioridade() { return prioridade; }
+}
