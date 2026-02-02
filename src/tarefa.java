@@ -4,7 +4,7 @@ public class tarefa {
     private String datatermino;
     private String categoria;
     private String status;
-    private String prioridade; // Mantive String para alinhar com seu código atual
+    private String prioridade;
 
     public tarefa(String nome, String descricao, String datatermino, String categoria, String status, String prioridade) {
         this.nome = nome;
