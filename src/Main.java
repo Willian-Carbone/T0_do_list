@@ -24,13 +24,44 @@ public class Main {
             nome = sc.nextLine();
             System.out.println("Digite a descricao do tarefa");
             descricao = sc.nextLine();
-            System.out.println("Digite a data de termino da tarefa no formato dia/mes/hora:minutos ");
+            System.out.println("Digite a data de termino da tarefa com o horario de vencimento no formato dd/mm/hora:minutos ");
             datatermino = sc.nextLine();
 
-            while (!datatermino.matches("[0-3][0-9]/[0-1][0-9]/[0-2][0-9]:[0-5][0-9]")){
+            while (!datatermino.matches("^[0-3][0-9]/[0-1][0-9]/([0-1][0-9]|2[0-3]):[0-5][0-9]$")){
                 System.out.println("Digite um valor valido");
                 datatermino = sc.nextLine();
             }
+
+            System.out.println("Deseja colocar um alarme para a tarefa? digite s para sim ou n para não");
+            String alarme = sc.nextLine();
+
+            while ( !(alarme.equals("s") || alarme.equals("n"))){
+                System.out.println("Digite um valor valido");
+                alarme = sc.nextLine();
+            };
+
+            Boolean alarmeescolha = false;
+            String hora= null;
+
+
+
+
+
+
+            if (alarme.equals("s")){
+                alarmeescolha=true;
+
+                System.out.println("Digite o horario do alarme para o dia");
+                hora = sc.nextLine();
+
+                while (!hora.matches("^([0-1][0-9]|2[0-3]):[0-5][0-9]$")){
+                    System.out.println("Digite um valor valido");
+                    hora = sc.nextLine();
+                }
+
+
+            };
+
 
 
 
@@ -60,7 +91,7 @@ public class Main {
 
             }
 
-            tarefa tarefacriada= new tarefa (nome, descricao , datatermino , opcaocategoria,opcaostatusatual,(opcaoprioridade));
+            tarefa tarefacriada= new tarefa (nome, descricao , datatermino , opcaocategoria,opcaostatusatual,opcaoprioridade,alarmeescolha,hora);
             System.out.println("Tarefa registrada com sucesso");
             minhas_tarefas.add(tarefacriada);
             Metodos.atualiza_arquivo(minhas_tarefas);
@@ -111,6 +142,8 @@ public class Main {
                     System.out.println("Status: " + tarefa.getStatus());
                     System.out.println("Prioridade: " + tarefa.getPrioridade());
                     System.out.println("data fim:" + tarefa.getDatatermino());
+                    System.out.println("Alarme definido:" + tarefa.getAlarme());
+                    System.out.println("Horario:" +tarefa.getHorario());
                     System.out.println();
                 }
             }

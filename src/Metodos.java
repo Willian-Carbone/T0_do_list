@@ -11,7 +11,7 @@ public class  Metodos {
         while (leitor.hasNextLine()) {
             String linha = leitor.nextLine();
             String[] partes = linha.split(",");
-            tarefa tr = new tarefa(partes[0],partes[1],partes[2],partes[3],partes[4],partes[5]);
+            tarefa tr = new tarefa(partes[0],partes[1],partes[2],partes[3],partes[4],partes[5],Boolean.parseBoolean(partes[6]),partes[7]);
             lista.add(tr);
 
         }
@@ -39,6 +39,9 @@ public class  Metodos {
                bw.write(t.getCategoria()+",");
                bw.write(t.getStatus()+",");
                bw.write(t.getPrioridade()+",");
+               bw.write(t.getAlarme()+",");
+               bw.write(t.getHorario()+",");
+
                bw.newLine();
            }
            bw.close();

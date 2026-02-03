@@ -5,12 +5,16 @@ public class tarefa {
     private String categoria;
     private String status;
     private String prioridade;
+    private Boolean alarme;
+    private String horario;
 
-    public tarefa(String nome, String descricao, String datatermino, String categoria, String status, String prioridade) {
+    public tarefa(String nome, String descricao, String datatermino, String categoria, String status, String prioridade, Boolean alarme,  String horario ) {
         this.nome = nome;
         this.descricao = descricao;
         this.datatermino = datatermino;
         this.prioridade = prioridade;
+        this.alarme=alarme;
+        this.horario=horario;
 
 
         this.categoria = traduzirCategoria(categoria);
@@ -44,4 +48,6 @@ public class tarefa {
     public String getCategoria() { return categoria; }
     public String getStatus() { return status; }
     public String getPrioridade() { return prioridade; }
+    public String getAlarme() { return Boolean.toString(alarme); }
+    public String getHorario() { return horario; }
 }
