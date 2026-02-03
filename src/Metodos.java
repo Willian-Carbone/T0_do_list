@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class  Metodos {
@@ -107,6 +109,33 @@ public class  Metodos {
        }
         return List.of();
     }
+
+    public static void emissaoalarme(){
+        LocalDate datadehoje= LocalDate.now();
+        LocalTime horario = LocalTime.now();
+
+        String diadomesformatado = Integer.toString(datadehoje.getDayOfMonth()) + "/" + Integer.toString(datadehoje.getMonthValue());
+        String horaformatada= Integer.toString(horario.getHour()) +":"+Integer.toString(horario.getMinute());
+
+
+
+        System.out.println(diadomesformatado);
+
+
+
+
+    }
+
+    public static Boolean checarmaior(int maior ,int menor){
+        if (maior<menor){
+            return false;
+        }
+
+        else{
+            return true;
+        }
+    }
+
 
 
 

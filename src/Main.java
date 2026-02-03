@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        Metodos.emissaoalarme();
+
+
+
+
+
+
         ArrayList<tarefa> minhas_tarefas = Metodos.emitirtarefas();
 
 
@@ -58,6 +66,32 @@ public class Main {
                     System.out.println("Digite um valor valido");
                     hora = sc.nextLine();
                 }
+
+
+
+                int horamaxtarefa= Integer.parseInt(datatermino.substring(0,2));
+                int minutomaxtarefa = Integer.parseInt(datatermino.substring(9));
+
+
+
+                int horaalarme= Integer.parseInt(hora.substring(0,2));
+                int minutoalarme=Integer.parseInt(hora.substring(3));
+
+                while (!Metodos.checarmaior(horamaxtarefa,horaalarme) || (horamaxtarefa>=horaalarme && !Metodos.checarmaior(minutomaxtarefa,minutoalarme)) ){
+                    System.out.println("Digite um horario de alarmme inferior ao horario maximo da tarefa");
+                    hora=sc.nextLine();
+
+                    while (!hora.matches("^([0-1][0-9]|2[0-3]):[0-5][0-9]$")){
+                        System.out.println("Digite um valor valido");
+                        hora = sc.nextLine();
+                    }
+
+                    horaalarme= Integer.parseInt(hora.substring(0,2));
+                    minutoalarme=Integer.parseInt(hora.substring(3));
+
+                }
+
+
 
 
             };
