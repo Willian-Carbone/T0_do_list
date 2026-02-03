@@ -6,11 +6,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Metodos.emissaoalarme();
+        ArrayList <String> alarmesdehoje = Metodos.emissaoalarme();
 
+        System.out.println("=====================");
+        System.out.println("tarefas que vencem hoje");
+        if (alarmesdehoje.isEmpty()) {
+            System.out.println("Nenhum alarme disparado, volte mais tarde");
+            System.out.println("=====================");
+        }
 
-
-
+        else {
+            for (String tarefadehoje:alarmesdehoje) {
+                System.out.println(tarefadehoje);
+                System.out.println();
+            }
+            System.out.println("========================");
+        }
 
 
         ArrayList<tarefa> minhas_tarefas = Metodos.emitirtarefas();
@@ -69,7 +80,7 @@ public class Main {
 
 
 
-                int horamaxtarefa= Integer.parseInt(datatermino.substring(0,2));
+                int horamaxtarefa= Integer.parseInt(datatermino.substring(6,8));
                 int minutomaxtarefa = Integer.parseInt(datatermino.substring(9));
 
 
@@ -77,9 +88,12 @@ public class Main {
                 int horaalarme= Integer.parseInt(hora.substring(0,2));
                 int minutoalarme=Integer.parseInt(hora.substring(3));
 
-                while (!Metodos.checarmaior(horamaxtarefa,horaalarme) || (horamaxtarefa>=horaalarme && !Metodos.checarmaior(minutomaxtarefa,minutoalarme)) ){
+                while (!Metodos.checarmaior(horamaxtarefa,horaalarme) || (horamaxtarefa==horaalarme && !Metodos.checarmaior(minutomaxtarefa,minutoalarme)) ){
                     System.out.println("Digite um horario de alarmme inferior ao horario maximo da tarefa");
                     hora=sc.nextLine();
+                    horaalarme= Integer.parseInt(hora.substring(0,2));
+                    minutoalarme=Integer.parseInt(hora.substring(3));
+
 
                     while (!hora.matches("^([0-1][0-9]|2[0-3]):[0-5][0-9]$")){
                         System.out.println("Digite um valor valido");

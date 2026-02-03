@@ -1,5 +1,6 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -110,16 +111,72 @@ public class  Metodos {
         return List.of();
     }
 
-    public static void emissaoalarme(){
-        LocalDate datadehoje= LocalDate.now();
-        LocalTime horario = LocalTime.now();
+    public static ArrayList <String> emissaoalarme()  {
 
-        String diadomesformatado = Integer.toString(datadehoje.getDayOfMonth()) + "/" + Integer.toString(datadehoje.getMonthValue());
-        String horaformatada= Integer.toString(horario.getHour()) +":"+Integer.toString(horario.getMinute());
+        File arq = new File("tarefas.txt");
+        ArrayList <String> saida = new ArrayList<>();
+
+        try{Scanner sc= new  Scanner(arq);
+
+            int horaatual= LocalTime.now().getHour();
+            int minutoatual= LocalTime.now().getMinute();
+
+            int diaatual = LocalDate.now().getDayOfMonth();
+            int mesatual = LocalDate.now().getMonthValue();
+
+            while (sc.hasNextLine()){
+                String linha=sc.nextLine();
+                String[] partes = linha.split(",");
+                if (partes[6].equals("true")){
+
+                    int diatarefa= Integer.parseInt(partes[2].substring(0,2));
+                    int mestarefa = Integer.parseInt(partes[2].substring(3,5));
+
+                    int horaalarme = Integer.parseInt(partes[7].substring(0,2));
+                    int minutoalarme = Integer.parseInt(partes[7].substring(3));
+
+                    int horatarefa = Integer.parseInt(partes[2].substring(6,8));
+                    int minutotarefa = Integer.parseInt(partes[2].substring(9));
 
 
 
-        System.out.println(diadomesformatado);
+
+                    if ( diaatual==diatarefa && mesatual==mestarefa)
+                    { if((horaatual>horaalarme || (horaatual==horaalarme && minutoatual>=minutoalarme))){
+                        String faltante="";
+                        int agoraemminutos = (horaatual*60) + minutoatual;
+                        int tarefaemminutos = (horatarefa*60) + minutotarefa;
+
+                        int diferenca= tarefaemminutos - agoraemminutos;
+                        if (diferenca >0){
+                            int conversaoh =diferenca / 60;
+                            int conversaomin = diferenca %60;
+
+                            faltante = String.format("%02d:%02d",conversaoh,conversaomin);
+                        }
+                        else if  (diferenca<0){
+                            faltante = "Esgotado";
+                        }
+                        else{
+                            faltante="Prazo acaba agora";
+                        }
+
+
+                        saida.add("Tarefa:" + partes[0] + " " + "Tempo faltante: " + faltante);}
+                    }
+
+                }
+
+            }
+
+
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return saida;
 
 
 
