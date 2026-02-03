@@ -24,7 +24,7 @@ public class tarefa {
             case "1", "trabalho" -> "trabalho";
             case "2", "lazer" -> "lazer";
             case "3", "hobbyes" -> "hobbyes";
-            default -> valor; //
+            default -> valor;
         };
     }
 

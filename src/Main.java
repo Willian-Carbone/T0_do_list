@@ -24,8 +24,15 @@ public class Main {
             nome = sc.nextLine();
             System.out.println("Digite a descricao do tarefa");
             descricao = sc.nextLine();
-            System.out.println("Digite a data de termino da tarefa (dia/mes/ano)");
+            System.out.println("Digite a data de termino da tarefa no formato dia/mes/hora:minutos ");
             datatermino = sc.nextLine();
+
+            while (!datatermino.matches("[0-3][0-9]/[0-1][0-9]/[0-2][0-9]:[0-5][0-9]")){
+                System.out.println("Digite um valor valido");
+                datatermino = sc.nextLine();
+            }
+
+
 
             System.out.println("Digite a categoria da tarefa: 1 para trabalho, 2 para lazer e 3 para hobbyes");
             String opcaocategoria = sc.nextLine();
