@@ -28,13 +28,14 @@ public class Main {
 
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite 1 para inserir uma tarefa ou 2 para ver as tarefas ja registradas");
+        System.out.println("Digite 1 para inserir uma tarefa , 2 para ver as tarefas ja registradas , 3 para remover tarefa");
         String opcaoacao = sc.nextLine();
 
-        while(!opcaoacao.equals("1") && !opcaoacao.equals("2")){
+        while(!opcaoacao.equals("1") && !opcaoacao.equals("2") && !opcaoacao.equals("3")){
             System.out.println("Digite um valor valido");
             opcaoacao= sc.nextLine();
         }
+
 
 
         if (opcaoacao.equals("1")){
@@ -157,7 +158,7 @@ public class Main {
 
         }
 
-        else{
+        else if  (opcaoacao.equals("2")){
 
             System.out.println("Defina o Método de : 1 categoria, 2 status , 3 prioridade");
             String opcaovisu = sc.nextLine();
@@ -210,6 +211,20 @@ public class Main {
 
 
 
+
+        }
+
+        else if (opcaoacao.equals("3")){
+            System.out.println("Digite o nome da tarefa que deseja remover");
+            String nome = sc.nextLine();
+
+            while (Metodos.disponibilidadenome(nome)){
+                System.out.println("Tarefa não encontrada, digite uma tarefa existente");
+                nome = sc.nextLine();
+            }
+
+            Metodos.removertarefa(nome);
+            System.out.println("Tarefa removida com sucesso");
 
         }
 

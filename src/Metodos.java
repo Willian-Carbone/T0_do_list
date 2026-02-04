@@ -214,6 +214,20 @@ public class  Metodos {
 
     }
 
+    public static void removertarefa (String nome_tarefa){
+        ArrayList<tarefa> tarefas_registradas = emitirtarefas();
+
+        for (tarefa t: tarefas_registradas){
+            if(t.getNome().equals(nome_tarefa)){
+                tarefas_registradas.remove(t);
+                break;
+            }
+        }
+
+        atualiza_arquivo(tarefas_registradas);
+    }
+
+
 
 
 
