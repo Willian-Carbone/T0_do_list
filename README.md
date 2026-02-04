@@ -10,8 +10,6 @@ INTERFACE EM TERMINAL PARA REGISTRO DE TAREFAS COM PERSISTENCIA DE DADOS
 
 --> tarefas.txt armazena tarefas
 
---> ao executar o aplicativo, uma lita das tarefas do dia é impresa no terminal, juntamente com o tempo que falta para seu prazo acabar
-
 ===================================================
 
 
