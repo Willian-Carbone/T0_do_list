@@ -41,6 +41,14 @@ public class Main {
             String nome, descricao,datatermino;
             System.out.println("Digite o nome do tarefa");
             nome = sc.nextLine();
+
+            while (!Metodos.disponibilidadenome(nome)){
+                System.out.println("O nome já esta sendo usado por outra tarefa ,escolha outro");
+                nome=sc.nextLine();
+
+            }
+
+
             System.out.println("Digite a descricao do tarefa");
             descricao = sc.nextLine();
             System.out.println("Digite a data de termino da tarefa com o horario de vencimento no formato dd/mm/hora:minutos ");

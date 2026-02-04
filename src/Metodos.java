@@ -194,6 +194,27 @@ public class  Metodos {
     }
 
 
+    public static Boolean disponibilidadenome( String nome){
+
+        ArrayList<tarefa> tarefas_registradas;
+        tarefas_registradas=emitirtarefas();
+        boolean disponivel=true;
+
+        for (tarefa t: tarefas_registradas){
+            if (t.getNome().equals(nome)){
+                disponivel=false;
+                break;
+
+            };
+        }
+
+        return disponivel;
+
+
+
+    }
+
+
 
 
 
