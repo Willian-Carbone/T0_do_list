@@ -28,10 +28,10 @@ public class Main {
 
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite 1 para inserir uma tarefa , 2 para ver as tarefas ja registradas , 3 para remover tarefa");
+        System.out.println("Digite 1 para inserir uma tarefa , 2 para ver as tarefas ja registradas , 3 para remover tarefa ou 4 para editar status ");
         String opcaoacao = sc.nextLine();
 
-        while(!opcaoacao.equals("1") && !opcaoacao.equals("2") && !opcaoacao.equals("3")){
+        while(!opcaoacao.equals("1") && !opcaoacao.equals("2") && !opcaoacao.equals("3") &&  !opcaoacao.equals("4")) {
             System.out.println("Digite um valor valido");
             opcaoacao= sc.nextLine();
         }
@@ -68,7 +68,7 @@ public class Main {
                 alarme = sc.nextLine();
             };
 
-            Boolean alarmeescolha = false;
+            boolean alarmeescolha = false;
             String hora= null;
 
 
@@ -203,6 +203,7 @@ public class Main {
                     System.out.println("Horario:" +tarefa.getHorario());
                     System.out.println();
                 }
+                sc.close();
             }
 
 
@@ -225,6 +226,71 @@ public class Main {
 
             Metodos.removertarefa(nome);
             System.out.println("Tarefa removida com sucesso");
+
+        }
+
+        else{
+
+            System.out.println("Digite o nome da tarefa que deseja editar");
+            String nome = sc.nextLine();
+
+            while (Metodos.disponibilidadenome(nome)){
+                System.out.println("Tarefa não encontrada, digite uma tarefa existente");
+                nome = sc.nextLine();
+            };
+
+            String opcao1 = "";
+            String opcao2 = "";
+            String statusatual = "";
+            String novo_status = "";
+
+
+            ArrayList<tarefa> tarefas= Metodos.emitirtarefas();
+
+            for (tarefa t: tarefas) {
+                if (t.getNome().equals(nome)){
+                    statusatual = t.getStatus();
+
+                    switch (statusatual) {
+
+                        case "To DO":
+                            opcao1= "Doing";
+                            opcao2 = "Done";
+                            break;
+
+                        case "Doing":
+                             opcao1= "To DO";
+                             opcao2 = "Done";
+                             break;
+
+                        case "Done":
+                             opcao1= "To DO";
+                             opcao2= "Doing";
+                             break;
+                    }
+
+                    break;
+
+                };
+
+            }
+
+            System.out.println("A tarefa atual possui o status:" + statusatual + " " + " digite 1 para trocar para:"+ opcao1 + " " + "ou 2 para trocar para:" + opcao2);
+            String opcao_escolhida = sc.nextLine();
+
+            if (!opcao_escolhida.equals("1") && !opcao_escolhida.equals("2") && opcao_escolhida.equals("3")) {
+                System.out.println("Digite um valor válido");
+                opcao_escolhida=sc.nextLine();
+            }
+
+
+            switch (opcao_escolhida){
+                case "1":  novo_status = opcao1 ;break;
+                case "2": novo_status = opcao2 ; break;
+            };
+
+            Metodos.editar_status(novo_status,nome);
+            System.out.print("Status editado com sucesso");
 
         }
 

@@ -227,6 +227,19 @@ public class  Metodos {
         atualiza_arquivo(tarefas_registradas);
     }
 
+    public static void editar_status(String novo_status,String nome_tarefa){
+        ArrayList<tarefa> tarefas = emitirtarefas();
+
+        for (tarefa t: tarefas){
+            if(t.getNome().equals(nome_tarefa)){
+                t.setStatus(novo_status);
+                break;
+            }
+        }
+
+        atualiza_arquivo(tarefas);
+    }
+
 
 
 

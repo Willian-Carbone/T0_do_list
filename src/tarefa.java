@@ -47,6 +47,7 @@ public class tarefa {
     public String getDatatermino() { return datatermino; }
     public String getCategoria() { return categoria; }
     public String getStatus() { return status; }
+    public void setStatus(String status){this.status = status;}
     public String getPrioridade() { return prioridade; }
     public String getAlarme() { return Boolean.toString(alarme); }
     public String getHorario() { return horario; }
