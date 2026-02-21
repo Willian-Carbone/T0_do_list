@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList <String> alarmesdehoje = Metodos.emissaoalarme();
+        ArrayList <String> alarmesdehoje = FileManager.emissaoalarme();
 
         System.out.println("=====================");
         System.out.println("tarefas que vencem hoje");
@@ -24,7 +25,7 @@ public class Main {
         }
 
 
-        ArrayList<tarefa> minhas_tarefas = Metodos.emitirtarefas();
+        ArrayList<tarefa> minhas_tarefas = FileManager.emitirtarefas();
 
 
         Scanner sc = new Scanner(System.in);
@@ -66,7 +67,7 @@ public class Main {
             while ( !(alarme.equals("s") || alarme.equals("n"))){
                 System.out.println("Digite um valor valido");
                 alarme = sc.nextLine();
-            };
+            }
 
             boolean alarmeescolha = false;
             String hora= null;
@@ -117,7 +118,7 @@ public class Main {
 
 
 
-            };
+            }
 
 
 
@@ -151,7 +152,7 @@ public class Main {
             tarefa tarefacriada= new tarefa (nome, descricao , datatermino , opcaocategoria,opcaostatusatual,opcaoprioridade,alarmeescolha,hora);
             System.out.println("Tarefa registrada com sucesso");
             minhas_tarefas.add(tarefacriada);
-            Metodos.atualiza_arquivo(minhas_tarefas);
+            FileManager.atualiza_arquivo(minhas_tarefas);
 
             sc.close();
 
@@ -237,7 +238,7 @@ public class Main {
             while (Metodos.disponibilidadenome(nome)){
                 System.out.println("Tarefa não encontrada, digite uma tarefa existente");
                 nome = sc.nextLine();
-            };
+            }
 
             String opcao1 = "";
             String opcao2 = "";
@@ -245,7 +246,7 @@ public class Main {
             String novo_status = "";
 
 
-            ArrayList<tarefa> tarefas= Metodos.emitirtarefas();
+            ArrayList<tarefa> tarefas= FileManager.emitirtarefas();
 
             for (tarefa t: tarefas) {
                 if (t.getNome().equals(nome)){
@@ -271,7 +272,7 @@ public class Main {
 
                     break;
 
-                };
+                }
 
             }
 
@@ -287,7 +288,7 @@ public class Main {
             switch (opcao_escolhida){
                 case "1":  novo_status = opcao1 ;break;
                 case "2": novo_status = opcao2 ; break;
-            };
+            }
 
             Metodos.editar_status(novo_status,nome);
             System.out.print("Status editado com sucesso");
