@@ -26,8 +26,6 @@ public class  Metodos {
                return listaorganizadaC;
 
 
-
-
            case "status":
                Map <String, List<tarefa>>grupoStatus = new LinkedHashMap<>();
                for  (tarefa t: lista){
@@ -77,10 +75,9 @@ public class  Metodos {
     }
 
 
-    public static Boolean disponibilidadenome( String nome){
 
-        ArrayList<tarefa> tarefas_registradas;
-        tarefas_registradas=FileManager.emitirtarefas();
+    public static Boolean verificarExistencia(ArrayList<tarefa> tarefas_registradas, String nome){
+
         boolean disponivel=true;
 
         for (tarefa t: tarefas_registradas){
@@ -93,13 +90,23 @@ public class  Metodos {
 
         return disponivel;
 
+    }
+
+
+
+
+    public static Boolean disponibilidadenome( String nome){
+
+        ArrayList<tarefa> tarefas_registradas;
+        tarefas_registradas=FileManager.emitirtarefas();
+        return verificarExistencia(tarefas_registradas,nome);
 
 
     }
 
-    public static void removertarefa (String nome_tarefa){
-        ArrayList<tarefa> tarefas_registradas = FileManager.emitirtarefas();
 
+
+    public static ArrayList <tarefa> removedor (ArrayList<tarefa> tarefas_registradas, String nome_tarefa){
         for (tarefa t: tarefas_registradas){
             if(t.getNome().equals(nome_tarefa)){
                 tarefas_registradas.remove(t);
@@ -107,11 +114,23 @@ public class  Metodos {
             }
         }
 
+        return tarefas_registradas;
+    }
+
+
+
+
+
+
+    public static void removertarefa (String nome_tarefa){
+        ArrayList<tarefa> tarefas_registradas = FileManager.emitirtarefas();
+
+        removedor (tarefas_registradas, nome_tarefa);
+
         FileManager.atualiza_arquivo(tarefas_registradas);
     }
 
-    public static void editar_status(String novo_status,String nome_tarefa){
-        ArrayList<tarefa> tarefas = FileManager.emitirtarefas();
+    public static ArrayList<tarefa> editorTarefa(ArrayList<tarefa> tarefas, String nome_tarefa, String novo_status){
 
         for (tarefa t: tarefas){
             if(t.getNome().equals(nome_tarefa)){
@@ -119,6 +138,20 @@ public class  Metodos {
                 break;
             }
         }
+
+        return tarefas;
+
+
+    }
+
+
+
+
+
+    public static void editar_status(String novo_status,String nome_tarefa){
+        ArrayList<tarefa> tarefas = FileManager.emitirtarefas();
+
+        tarefas = editorTarefa(tarefas,nome_tarefa,novo_status);
 
         FileManager.atualiza_arquivo(tarefas);
     }
