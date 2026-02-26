@@ -26,6 +26,14 @@ ADESOES EXTRAS:
 
 --> entrada em index.html localizado em app\src\main\resources\index.html
 
+--> é possivel que o usuario crie tarefas e a s visualize em tempo de criação
+
+--> é possivel editar e remover multiplas tarefas simultaneamente
+
+-->é possivel definir alarmes pop-up
+
+--> é possivel listar as tarefas em ordem escolhida pelo usuario
+
 --> utiliza localstorage, para persistencia de registros de tarefas
 
 
