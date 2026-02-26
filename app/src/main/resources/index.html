@@ -11,16 +11,339 @@
 
     <link rel="icon" type="image/x-icon" href="todolist.jpg">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+
     <meta name="description" content="Projeto ToDo lIst com java, groovy , spock e frontend">
-    <meta name="author" content="Seu Nome">
+    <meta name="author" content="Willian Carbone Bueno">
 </head>
 <body>
 
-<header></header>
+<header>
 
-<main>  </main>
+    <div class="header_info animar_entrada">
+    <p id="data"></p>
 
-<footer> </footer>
+    </div>
+
+   
+    <div id="texto_header" class="animar_entrada">
+
+        <h1>Minha lista de Tarefas</h1>
+        
+        <p>
+            Organize sua
+            <span class="erro">bagunça mental</span>
+            <span class="correcao">Lista de afazeres</span>
+        </p>
+
+
+    </div>
+
+
+    <div class="header_info animar_entrada">
+
+        <p id="hora"></p>
+
+    </div>
+
+</header>
+
+
+
+<main> 
+
+    <div id="principal" >
+
+       
+
+
+        <div id = "lista principal"  >
+
+            <div  class="animar_entrada" id="container_tarefas">
+
+                
+               
+               
+
+
+            </div>
+
+
+            <div class="container_botao">
+
+            <div class="botao animar_entrada" id="botao_adicionar" onclick="mostrarFormulario('formulario_criacao')">
+
+                <p>Adicionar Tarefa</p>
+
+            </div>
+
+            <div class="botao animar_entrada" id="botao_remover" onclick="mostrarFormulario('formulario_remocao')">
+                <p>remover tarefa</p>
+            </div>
+
+
+           
+        </div>
+
+
+    
+
+
+        <div class="container_botao">
+
+            <div class="botao animar_entrada" id="botao_ordenacao" onclick="mostrarFormulario('formulario_ordenacao')">
+
+                <p>aplicar ordenação</p>
+
+            </div>
+
+
+                
+
+                <div class="botao animar_entrada" id="botao_edicao" onclick="mostrarFormulario('formulario_edicao')">
+
+                    <p>editar tarefas</p>
+
+                </div>
+    
+            </div>
+
+            
+
+
+        
+    
+        </div>
+
+        
+
+    </div>
+
+    
+
+    <div id="form_aux" class="animar_lado">
+
+        <div class="placeholder formulario animar_lado ativo" >
+
+            <h4>Aqui aparecerão as ferremantas necessárias para suas tarefas</h4>
+            <h5>Escolha uma opção ao lado</h5>
+
+        </div>
+
+
+        <div class="formulario animar_lado" id="formulario_remocao" >
+
+            <form action="#" id="info_remocao">
+
+                <label for="confirmar_remocao">Deseja remover todas as tarefas selecionadas?</label>
+
+                <input type="submit" value="Confirmar Remoção">
+
+
+
+            </form>
+
+
+        </div>
+        
+
+        <div class="formulario animar_lado" id="formulario_criacao">
+
+            <form action="#" id="info_criacao">
+
+                
+
+
+                <label for="nome_tarefa">Informe o nome da tarefa</label>
+                <input type="text" id="nome_tarefa" placeholder="nome da tarefa" required>
+
+                <label for="descricao_tarefa">informe uma breve descrição sobre a tarefa</label>
+                
+                <input type="text" name="" id="descricao_tarefa" placeholder="descrição da tarefa" required>
+
+                <label for="data_termino">informe o dia limite de conclusão da tarefa</label>
+                <input type="date" name="" id="data_termino" placeholder="data de término da tarefa" required>
+
+                <label for="hora_termino">informe o horario maximo da tarefa</label>
+                <input type="time" name="" id="hora_maxima" placeholder="hora de término da tarefa" required>
+
+
+                <label for="prioridade_tarefa">Informe o nivel de prioridade</label> <span id="valor_prioridade">1</span>
+                <input type="range" name="" id="prioridade_tarefa" placeholder="prioridade da tarefa" max="5" min="1" required value="1">
+
+
+                <div class="form_radio">
+
+                    <p>informe a categoria da tarefa</p>
+
+
+                    <label for="trabalho">trabalho</label>
+                    <input type="radio" name="categoria" id="trabalho" value="trabalho" required>
+
+                    <label for="lazer">Lazer</label>
+                    <input type="radio" name="categoria" id="lazer" value="lazer" >
+
+                    <label for="hobbyes">Hobbyes</label>
+                    <input type="radio" name="categoria" id="hobbyes" value="hobbyes" >
+                        
+
+                </div>
+
+
+
+                <div class="form_radio">
+
+                    <p>informe o status</p>
+
+                    <label for="Done">Feita</label>
+                    <input type="radio" name="status" id="Done" value="Feita" required>
+
+                    <label for="Doing">Fazendo</label>
+                    <input type="radio" name="status" id="Doing" value="Fazendo" >
+
+                    <label for="To DO">A fazer</label>
+                    <input type="radio" name="status" id="To DO" value="A fazer" >
+                        
+
+                </div>
+
+                
+                
+
+                   
+                <label for="hora_alarme">Informe a hora do alarme para a tarefa atual (opcional)</label>
+                <input type="time" name="" id="hora_alarme">
+
+                <input type="submit" value="confirmar">
+                <input type="reset" value="limpar">
+
+
+
+            </form>
+
+
+        </div>
+
+
+        <div class="formulario animar_lado " id="formulario_edicao">
+
+            <h4> informe as mudanças , elas serão implementadas nas tarefas selecionadas, cada valor é opcional</h4>
+
+            <form action="#" id="info_edicao">
+
+                <label for="mudancas_prioridade">Selecione um novo nivel de prioridade</label>
+                <select name="opcao_prioridade" id="mudanca_prioridade">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="manter_anterior" selected>não modificar</option>
+
+                  
+
+                </select>
+                
+                <label for="mudancas_status">Selecione um novo status</label>
+                <select name="opcao_status" id="mudanca_status">
+
+                    <option value="Fazendo">Fazendo</option>
+                    <option value="A fazer">A fazer</option>
+                    <option value="Feita">Feita </option>
+                    <option value="manter_anterior" selected>não modificar</option>
+
+
+                </select>
+                <label for="novo_alarme">Informe um novo horario de alarme para a tarefa</label>
+                <input type="time" placeholder="informe um novo horario de alarme" id="mudanca_alarme">
+
+                <label for="nova_descricao">Informe uma nova descrição para a tarefa</label>
+                <input type="text" placeholder="nova descrição" id="mudanca_descricao">
+
+                <input type="submit" value="confirmar mudanças">
+                <input type="reset" value="limpar">
+
+
+
+
+            </form>
+
+
+        </div>
+
+
+        <div class="formulario animar_lado " id="formulario_ordenacao">
+
+            <form action="#" id="info_ordenacao">
+
+                <label for="escolha_ordenação">Escolha o tipo de ordenação que deseja aplicar</label>
+
+                <select name="ordenacao" id="escolha_ordenacao">
+
+                    <option value="prioridade">Por prioridade</option>
+                    <option value="status">Por status</option>
+                    <option value="categoria">por categoria</option>
+
+                </select>
+
+                <input type="submit" value="confirmar ordenação">
+
+
+
+
+
+            </form>
+
+
+        </div>
+
+
+
+        
+
+
+
+
+    </div>
+
+    
+</main>
+
+<div class="main confirmacao_log ">
+
+    
+
+    
+    <div class="container_confirmacao" >
+
+        <div id="log" class="animar_entrada">
+
+           <h4>aqui se encontra o resumo da sua ação</h4>
+          
+
+           
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+   
+
+
+</div>
+
+
+
+
+<script src="javascript.js"></script>
+
 
 
 </body>
