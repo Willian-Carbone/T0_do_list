@@ -2,7 +2,7 @@
 
 INTERFACE EM TERMINAL PARA REGISTRO DE TAREFAS COM PERSISTENCIA DE DADOS
 
---> Execute arquivo Main.java
+--> Execute arquivo Main.java , 
 
 --> Arquivo tarefa.java contem a classe
 
@@ -14,9 +14,23 @@ INTERFACE EM TERMINAL PARA REGISTRO DE TAREFAS COM PERSISTENCIA DE DADOS
 
 --> Os arquivos referentes aos testes uniários se encontram em app/src/test/groovy sendo eles FileManserSpec e MetodosSpec
 
---> Tecnologias utilizadas: Spock,Java, Groovy , Gradle
+
     
 
 ===================================================
 
+
+ADESOES EXTRAS:
+
+--> interface com html, css e javascrypt
+
+--> entrada em index.html localizado em app\src\main\resources\index.html
+
+--> utiliza localstorage, para persistencia de registros de tarefas
+
+
+======================================================
+
+
+--> Tecnologias utilizadas: Spock,Java, Groovy ,html,css ,javascrypt
 
