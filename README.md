@@ -24,7 +24,7 @@ ADESOES EXTRAS:
 
 --> interface com html, css e javascrypt
 
---> entrada em index.html localizado em app\src\main\resources\index.html
+--> entrada em index.html localizado em FrontEnd
 
 --> é possivel que o usuario crie tarefas e a s visualize em tempo de criação
 
