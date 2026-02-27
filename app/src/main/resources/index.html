@@ -139,7 +139,7 @@
 
                 <label for="confirmar_remocao">Deseja remover todas as tarefas selecionadas?</label>
 
-                <input type="submit" value="Confirmar Remoção">
+                <input type="submit" value="Confirmar Remoção" id="confirmar_remocao">
 
 
 
@@ -166,7 +166,7 @@
                 <label for="data_termino">informe o dia limite de conclusão da tarefa</label>
                 <input type="date" name="" id="data_termino" placeholder="data de término da tarefa" required>
 
-                <label for="hora_termino">informe o horario maximo da tarefa</label>
+                <label for="hora_maxima">informe o horario maximo da tarefa</label>
                 <input type="time" name="" id="hora_maxima" placeholder="hora de término da tarefa" required>
 
 
@@ -233,7 +233,7 @@
 
             <form action="#" id="info_edicao">
 
-                <label for="mudancas_prioridade">Selecione um novo nivel de prioridade</label>
+                <label for="mudanca_prioridade">Selecione um novo nivel de prioridade</label>
                 <select name="opcao_prioridade" id="mudanca_prioridade">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -246,7 +246,7 @@
 
                 </select>
                 
-                <label for="mudancas_status">Selecione um novo status</label>
+                <label for="mudanca_status">Selecione um novo status</label>
                 <select name="opcao_status" id="mudanca_status">
 
                     <option value="Fazendo">Fazendo</option>
@@ -256,10 +256,10 @@
 
 
                 </select>
-                <label for="novo_alarme">Informe um novo horario de alarme para a tarefa</label>
+                <label for="mudanca_alarme">Informe um novo horario de alarme para a tarefa</label>
                 <input type="time" placeholder="informe um novo horario de alarme" id="mudanca_alarme">
 
-                <label for="nova_descricao">Informe uma nova descrição para a tarefa</label>
+                <label for="mudanca_descricao">Informe uma nova descrição para a tarefa</label>
                 <input type="text" placeholder="nova descrição" id="mudanca_descricao">
 
                 <input type="submit" value="confirmar mudanças">
@@ -278,7 +278,7 @@
 
             <form action="#" id="info_ordenacao">
 
-                <label for="escolha_ordenação">Escolha o tipo de ordenação que deseja aplicar</label>
+                <label for="escolha_ordenacao">Escolha o tipo de ordenação que deseja aplicar</label>
 
                 <select name="ordenacao" id="escolha_ordenacao">
 
