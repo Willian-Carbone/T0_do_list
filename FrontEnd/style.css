@@ -224,6 +224,7 @@ main{
     align-items: center;
     margin: 10px;
     height: 60px;
+    gap:10px;
 }
 
 #container_tarefas input[type="checkbox"] {
@@ -232,10 +233,12 @@ main{
     cursor: pointer;
 }
 
-#container_lista tarefas {
-    font-size: 16px;
+#container_tarefas .item label{
     cursor: pointer;
+  
 }
+
+
 
 
 #container_tarefas input[type="checkbox"]:checked + label {
