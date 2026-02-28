@@ -227,12 +227,14 @@ export function disparar_alarme(lista_alarmes){
 
 export function remover_tarefas(tarefas_a_serem_removidas){
 
+    let contador =0
     
     for (let tarefa in tarefas_a_serem_removidas){
+        contador ++
         localStorage.removeItem(tarefas_a_serem_removidas[tarefa].nome)
     }
 
-    return tarefas_a_serem_removidas
+    return contador
 
     
 
