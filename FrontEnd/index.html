@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="icon" type="image/x-icon" href="../app/src/main/resources/todolist.jpg">
+    <link rel="icon" type="image/x-icon" href="todolist.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,13 +73,13 @@
 
             <div class="container_botao">
 
-            <div class="botao animar_entrada" id="botao_adicionar" onclick="mostrarFormulario('formulario_criacao')">
+            <div class="botao animar_entrada" id="botao_adicionar" data-form="formulario_criacao">
 
                 <p>Adicionar Tarefa</p>
 
             </div>
 
-            <div class="botao animar_entrada" id="botao_remover" onclick="mostrarFormulario('formulario_remocao')">
+            <div class="botao animar_entrada" id="botao_remover" data-form="formulario_remocao" >
                 <p>remover tarefa</p>
             </div>
 
@@ -93,7 +93,7 @@
 
         <div class="container_botao">
 
-            <div class="botao animar_entrada" id="botao_ordenacao" onclick="mostrarFormulario('formulario_ordenacao')">
+            <div class="botao animar_entrada" id="botao_ordenacao" data-form="formulario_ordenacao">
 
                 <p>aplicar ordenação</p>
 
@@ -102,7 +102,7 @@
 
                 
 
-                <div class="botao animar_entrada" id="botao_edicao" onclick="mostrarFormulario('formulario_edicao')">
+                <div class="botao animar_entrada" id="botao_edicao" data-form="formulario_edicao">
 
                     <p>editar tarefas</p>
 
@@ -342,7 +342,7 @@
 
 
 
-<script src="javascript.js"></script>
+<script type="module" src="HtmlReader.js" ></script>
 
 
 
