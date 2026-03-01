@@ -67,19 +67,19 @@ function atualizar_lista(lista = null) {
             <div class="item">
                 <input type="checkbox" id="${valor.nome}">
                 <label for="${valor.nome}">
-                    nome: ${valor.nome},
-                    desc: ${valor.descricao},
-                    data: ${valor.data},
-                    hora: ${valor.hora_maxima},
-                    categoria: ${valor.categoria},
-                    status: ${valor.status},
-                    prioridade: ${valor.prioridade},
-                    alarme: ${valor.alarme_escolha},
+                    nome: ${valor.nome} %
+                    desc: ${valor.descricao} %
+                    data: ${valor.data} %
+                    hora: ${valor.hora_maxima} %
+                    categoria: ${valor.categoria} %
+                    status: ${valor.status} %
+                    prioridade: ${valor.prioridade} % 
+                    alarme: ${valor.alarme_escolha} %
                     hora: ${valor.hora_alarme}
                 </label>
             </div>
 
-            <br>
+            
         `;
     }
 

@@ -27,7 +27,7 @@ body{
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
     
     
@@ -123,22 +123,21 @@ header h1 {
 main{
   
     display: flex;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     justify-content: center;
-    
-    
-    
-    
+    flex-wrap: wrap;
+   
     
 }
 
 
 #principal{
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
    align-items: center;
+   justify-content: center;
     font-family: var(--fonte-padrão);
     flex: 1;
     background-color: #f8f8f871;
@@ -221,10 +220,11 @@ main{
 
 #container_tarefas .item {
     display: flex;
-    align-items: center;
-    margin: 10px;
-    height: 60px;
-    gap:10px;
+    gap: 10px;
+    margin-bottom: 20px;
+    
+    
+    
 }
 
 #container_tarefas input[type="checkbox"] {
@@ -288,10 +288,10 @@ main{
 
 .confirmacao_log{
     display: flex;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center
+    width: 100%;
+    height: 100%;
+    
+   
    
 }
 
@@ -302,6 +302,7 @@ main{
     flex: 1;
     background-color:#f8f8f871 ;
     height: 100%;
+    
     
         
 }
@@ -319,7 +320,8 @@ main{
     background-color: var(--cor_fundo_log);
     width: 100%;
     height: 100%;
-    
+    overflow-y: hidden;
+    flex-wrap: wrap;
     
 
 }
@@ -386,24 +388,13 @@ form input , form label{
 
 /*querryes*/
 
-@media (max-width: 800px) {
+
+
+@media (max-width: 800px) , (max-width :450px) {
     main{
-        flex-direction: column;
-        margin: 30px;
-    }
-
-    .form_aux{
-        flex: 1;
-    }
-
-
-    
-} 
-
-@media (max-width: 800px) {
-    main{
-        flex-direction: column;
-        margin: 30px;
+        
+        display: block;
+        margin-bottom: 30px;
     }
 
     .form_aux{
@@ -420,16 +411,44 @@ form input , form label{
         margin-bottom: 30px;
     }
 
+    #log{
+       max-width:100vw ;
+       flex-wrap: wrap;
+       overflow-y: hidden;
+    }
+
+    
 
 
     
 } 
 
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
+
+   #container_tarefas{
+        max-width: 400px;
+    
+    }
+}
+
+
+
+
+
+
+    
+
+
+
+
+
+
+@media (max-width: 380px) {
     main{
-        flex-direction: column;
-        margin: 30px;
+        
+        display: block;
+        margin-bottom: 100px;
     }
 
     .form_aux{
@@ -446,122 +465,18 @@ form input , form label{
         margin-bottom: 30px;
     }
 
-    #texto_header p  {
-        display: none;
+    #log{
+       max-width:100vw ;
+       flex-wrap: wrap;
+       overflow-y: hidden;
     }
 
-    header h1{
-        font-size: 20px;
-    }
-
-
-
-    
-} 
-
-
-
-@media (max-width: 390px) {
-    main{
-        flex-direction: column;
-        margin: 30px;
-    }
-
-    .form_aux{
-        flex: 1;
-    }
-
-    #container_tarefas{
-        width: 60;
-        height: calc(60px *3);
-
-    
-
-    }
-
-    #texto_header p  {
-        display: none;
-    }
-
-    header h1{
-        font-size: 20px;
-    }
-
-
-
-    
-} 
-
-
-@media (max-width: 390px) {
-    main{
-        flex-direction: column;
-        margin: 30px;
-    }
-
-    .form_aux{
-        flex: 1;
-    }
-
-    #container_tarefas{
-        width: 60;
-        height: calc(60px *3);
-
-    
-
-    }
-
-    
-
-
-
-    
-
-   
-
-    #texto_header p  {
-        display: none;
-    }
-
-    header h1{
-        font-size: 20px;
-    }
-
-
-
-    
-} 
-
-
-
-@media (max-width: 350px) {
-    main{
-        flex-direction: column;
-        margin: 40px;
-    }
-
-   
-
-    .item {
-        display: flex;
-        flex-direction: column;
-        margin:30px;
-    }
-
-    .botao{
-        padding: 5px;
-    }
-
-
-    #container_tarefas{
-        height: calc(60px *4.3);
-        font-size: 13px;
-
-
-    }
-
+     #container_tarefas{
+    max-width: 375px;
+   }
   
 
+    
    
 
     #texto_header p  {
@@ -576,6 +491,68 @@ form input , form label{
 
     
 } 
+
+
+
+@media (max-width: 340px) {
+      main{
+        
+        display: block;
+        margin-bottom: 110px;
+    }
+
+    .form_aux{
+        flex: 1;
+    }
+
+    #container_tarefas{
+
+        height: calc(60px *3);
+        
+
+    }
+
+    .item{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #formulario_criacao{
+        margin-bottom: 30px;
+    }
+
+    #log{
+       max-width:100vw ;
+       flex-wrap: wrap;
+       overflow-y: hidden;
+    }
+
+     #container_tarefas{
+    max-width: 320px;
+   }
+  
+
+    
+   
+
+    #texto_header p  {
+        display: none;
+    }
+
+    header h1{
+        font-size: 20px;
+    }
+
+
+
+    
+} 
+
+
+
+    
+
 
 
 
