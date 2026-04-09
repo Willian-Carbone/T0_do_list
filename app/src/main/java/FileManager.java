@@ -1,3 +1,7 @@
+
+
+import org.jspecify.annotations.NonNull;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,15 +14,10 @@ import java.util.Scanner;
 
 public abstract class FileManager {
 
-    public static tarefa  criador_tarefa(String[] partes){
 
-        tarefa tr = new tarefa(partes[0],partes[1],partes[2],partes[3],partes[4],partes[5],Boolean.parseBoolean(partes[6]),partes[7]);
 
-        return tr;
-    }
-    
 
-    public static ArrayList<tarefa> emitirtarefas( ){
+    public static  ArrayList<tarefa> emitirTarefas( ){
         File arq = new File("tarefas.txt");
         ArrayList<tarefa> lista = new ArrayList<>();
 
@@ -29,7 +28,7 @@ public abstract class FileManager {
                 String linha = leitor.nextLine();
                 String[] partes = linha.split(",");
 
-                tarefa tarefaCriada= criador_tarefa(partes);
+                tarefa tarefaCriada= Metodos.criarTarefa(partes);
 
                 lista.add(tarefaCriada);
 
@@ -45,29 +44,18 @@ public abstract class FileManager {
 
     }
 
-    public static String transformarTarefaEmLinha(tarefa t) {
-        return String.join(",",
-                t.getNome(),
-                t.getDescricao(),
-                t.getDatatermino(),
-                t.getCategoria(),
-                t.getStatus(),
-                t.getPrioridade(),
-                String.valueOf(t.getAlarme()),
-                t.getHorario()
-        );
-    }
 
 
 
 
-    public static void atualiza_arquivo(ArrayList<tarefa> lista){
+
+    public static void atualizarArquivo(ArrayList<tarefa> lista){
 
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter("tarefas.txt"));
             for (tarefa t: lista){
 
-                String linhaFormatada = transformarTarefaEmLinha(t);
+                String linhaFormatada = Metodos.transformarTarefaEmLinha(t);
                 bw.write(linhaFormatada);
 
                 bw.newLine();
@@ -95,21 +83,7 @@ public abstract class FileManager {
             if (agora.getHour() < horaA || (agora.getHour() == horaA && agora.getMinute() < minA)) return null;
 
 
-            int horaT = Integer.parseInt(partes[2].substring(6, 8));
-            int minT = Integer.parseInt(partes[2].substring(9));
-
-            int agoraEmMin = (agora.getHour() * 60) + agora.getMinute();
-            int tarefaEmMin = (horaT * 60) + minT;
-            int diferenca = tarefaEmMin - agoraEmMin;
-
-            String faltante;
-            if (diferenca > 0) {
-                faltante = String.format("%02d:%02d", diferenca / 60, diferenca % 60);
-            } else if (diferenca < 0) {
-                faltante = "Esgotado";
-            } else {
-                faltante = "Prazo acaba agora";
-            }
+            String faltante = calcularTempoFaltanteParaAlarme(agora, partes);
 
             return "Tarefa:" + partes[0] + " Tempo faltante: " + faltante;
 
@@ -118,14 +92,27 @@ public abstract class FileManager {
         }
     }
 
+    private static @NonNull String calcularTempoFaltanteParaAlarme(LocalTime agora, String[] partes) {
+        int horaT = Integer.parseInt(partes[2].substring(6, 8));
+        int minT = Integer.parseInt(partes[2].substring(9));
+
+        int agoraEmMin = (agora.getHour() * 60) + agora.getMinute();
+        int tarefaEmMin = (horaT * 60) + minT;
+        int diferenca = tarefaEmMin - agoraEmMin;
+
+        String faltante;
+        if (diferenca > 0) {
+            faltante = String.format("%02d:%02d", diferenca / 60, diferenca % 60);
+        } else if (diferenca < 0) {
+            faltante = "Esgotado";
+        } else {
+            faltante = "Prazo acaba agora";
+        }
+        return faltante;
+    }
 
 
-
-
-
-
-
-    public static ArrayList <String> emissaoalarme()  {
+    public static ArrayList <String> emissaoAlarme()  {
 
         File arq = new File("tarefas.txt");
         ArrayList<String> saida = new ArrayList<>();

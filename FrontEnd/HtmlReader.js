@@ -15,9 +15,9 @@ botoes.forEach(botao => {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    data_header();
-    hora_header();
-    atualizar_lista();
+    dataHeader();
+    horaHeader();
+    atualizarLista();
     
     
 });
@@ -28,14 +28,14 @@ const minuto = segundo * 60;
 
 
 setInterval(function() {
-    hora_header();
+    horaHeader();
 }, segundo);
 
 
 setInterval(function() {
-    let alarmes= logica.listar_alarme_a_disparar()
-    logica.disparar_alarme(alarmes);
-    atualizar_lista();
+    let alarmes= logica.listarAlarmesParaDisparar()
+    logica.dispararAlarme(alarmes);
+    atualizarLista();
 }, minuto);
 
 
@@ -46,14 +46,14 @@ document.querySelector("#data_termino").min = hoje;
 
 
 
-function atualizar_lista(lista = null) {
+function atualizarLista(lista = null) {
 
-    let mostrador_tarefas = document.getElementById("container_tarefas");
-    mostrador_tarefas.innerHTML = "";
+    let mostradorTarefas = document.getElementById("container_tarefas");
+    mostradorTarefas.innerHTML = "";
 
     let html = "";
 
-    let tarefas = lista || logica.capturar_todas_tarefas();
+    let tarefas = lista || logica.CapturarTarefas();
 
 
     for (let i = 0; i < tarefas.length; i++) {
@@ -83,18 +83,18 @@ function atualizar_lista(lista = null) {
         `;
     }
 
-    mostrador_tarefas.innerHTML = html;
+    mostradorTarefas.innerHTML = html;
 }
 
 
 
 
-function data_header() {
+function dataHeader() {
     document.getElementById("data").innerHTML = new Date().toLocaleDateString()
 
 }
 
-function hora_header() {
+function horaHeader() {
     document.getElementById("hora").innerHTML = new Date().toLocaleTimeString()
 
 }
@@ -127,19 +127,19 @@ const formularios = document.querySelectorAll("form");
 formularios.forEach(form => {
     form.addEventListener("submit", function(event) {
         event.preventDefault();
-        atualizar_log(this);
+        atualizarLog(this);
     });
 });
 
 
 
-function atualizar_log(objeto){
+function atualizarLog(objeto){
 
 
     const log = document.getElementById("log")
 
 
-    if (objeto.id == "info_criacao"){
+    if (objeto.id === "info_criacao"){
         
 
         let nome = objeto.querySelector("#nome_tarefa").value
@@ -159,7 +159,7 @@ function atualizar_log(objeto){
         let alarme_escolha ="definido"
         let hora_alarme = objeto.querySelector("#hora_alarme").value
         
-        if (hora_alarme == ""){
+        if (hora_alarme === ""){
             alarme_escolha = "Optou por nao definir"
             hora_alarme = "Alarme nao informado"
 
@@ -177,8 +177,8 @@ function atualizar_log(objeto){
         const chave=nome
         let valor = new logica.Tarefa(nome,descricao,data,hora_maxima,categoria,status,prioridade,alarme_escolha,hora_alarme)
 
-        logica.salvar_tarefa(chave,JSON.stringify(valor))
-        atualizar_lista()
+        logica.salvarTarefa(chave,JSON.stringify(valor))
+        atualizarLista()
 
 
     
@@ -186,17 +186,17 @@ function atualizar_log(objeto){
     }
 
 
-    else if (objeto.id == "info_edicao"){
+    else if (objeto.id === "info_edicao"){
 
-        let nova_prioridade = objeto.querySelector("#mudanca_prioridade").value
-        let novo_status = objeto.querySelector("#mudanca_status").value
-        let novo_alarme = objeto.querySelector("#mudanca_alarme").value
-        let nova_descricao = objeto.querySelector("#mudanca_descricao").value
+        let novaPrioridade = objeto.querySelector("#mudanca_prioridade").value
+        let novoStatus = objeto.querySelector("#mudanca_status").value
+        let novoAlarme = objeto.querySelector("#mudanca_alarme").value
+        let novaDescricao = objeto.querySelector("#mudanca_descricao").value
 
-        let tarefas_capturadas = capturar_tarefas_por_id()
+        let tarefasCapturadas = capturarTarefasPorIdentificador()
         
-        logica.editar_tarefa(nova_prioridade,novo_status,novo_alarme,nova_descricao,tarefas_capturadas)
-        atualizar_lista()
+        logica.editarTarefa(novaPrioridade,novoStatus,novoAlarme,novaDescricao,tarefasCapturadas)
+        atualizarLista()
         
 
 
@@ -206,27 +206,27 @@ function atualizar_log(objeto){
 
 
     
-    else if (objeto.id == "info_remocao"){
+    else if (objeto.id === "info_remocao"){
 
-        let tarefas = capturar_tarefas_por_id()
+        let tarefas = capturarTarefasPorIdentificador()
         
 
-        let quantidade_removida = logica.remover_tarefas(tarefas)
+        let quantidadeRemovida = logica.removerTarefas(tarefas)
 
 
 
-        log.innerHTML = `Foram removidas ${quantidade_removida} tarefas`
+        log.innerHTML = `Foram removidas ${quantidadeRemovida} tarefas`
         
-        atualizar_lista()
+        atualizarLista()
 
 
         
     }
 
-    else if (objeto.id == "info_ordenacao"){
+    else if (objeto.id === "info_ordenacao"){
 
-        let lista_ordenada = ordenar_tarefas()
-        atualizar_lista(lista_ordenada)
+        let lista_ordenada = ordenarTarefas()
+        atualizarLista(lista_ordenada)
         log.innerHTML = "tarefas ordenadas na forma especificada"
     }
 
@@ -251,13 +251,11 @@ function atualizar_log(objeto){
 
 
 
-function  capturar_tarefas_por_id(){
+function  capturarTarefasPorIdentificador(){
 
 
     let marcados = document.querySelectorAll(".item input[type='checkbox']:checked");
-    let tarefas_capturadas = logica.retornar_tarefas_marcadas(marcados)
-
-    return tarefas_capturadas;
+    return logica.capturarTarefasMarcadas(marcados);
 
 
 }
@@ -270,13 +268,11 @@ function  capturar_tarefas_por_id(){
 
 
 
-function ordenar_tarefas(){
+function ordenarTarefas(){
 
-    let escolha_de_ordenacao = document.getElementById("escolha_ordenacao")
-    let tarefas = logica.capturar_todas_tarefas()
-    let lista_ordenada = logica.ordenador(tarefas,escolha_de_ordenacao.value)
-
-    return lista_ordenada
+    let escolhaDeOrdenacao = document.getElementById("escolha_ordenacao")
+    let tarefas = logica.CapturarTarefas()
+    return logica.ordenador(tarefas, escolhaDeOrdenacao.value)
 
 
 }

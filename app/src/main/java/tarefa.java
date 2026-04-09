@@ -1,12 +1,12 @@
 public class tarefa {
-    private String nome;
-    private String descricao;
-    private String datatermino;
-    private String categoria;
+    private final String nome;
+    private final String descricao;
+    private final String datatermino;
+    private final String categoria;
     private String status;
-    private String prioridade;
-    private Boolean alarme;
-    private String horario;
+    private final String prioridade;
+    private final Boolean alarme;
+    private final String horario;
 
     public tarefa(String nome, String descricao, String datatermino, String categoria, String status, String prioridade, Boolean alarme,  String horario ) {
         this.nome = nome;

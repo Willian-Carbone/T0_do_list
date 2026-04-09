@@ -1,10 +1,9 @@
 
 
 
-
 export class Tarefa{
 
-    constructor(nome, descricao, data,hora_maxima, categoria, status, prioridade,alarme_escolha, hora_alarme, ){
+    constructor(nome, descricao, data,hora_maxima, categoria, status, prioridade,alarmeEscolha, horaAlarme, ){
         this.nome = nome;
         this.descricao = descricao;
         this.data = data;
@@ -12,8 +11,8 @@ export class Tarefa{
         this.categoria = categoria;
         this.status = status;
         this.prioridade = prioridade;
-        this.alarme_escolha = alarme_escolha;
-        this.hora_alarme = hora_alarme
+        this.alarme_escolha = alarmeEscolha;
+        this.hora_alarme = horaAlarme
     }
 
 
@@ -22,10 +21,10 @@ export class Tarefa{
 }
 
 
-export function ordenador(tarefas,escolha_de_ordenacao){
+export function ordenador(tarefas, escolhaDeOrdenacao){
 
 
-     switch (escolha_de_ordenacao) {
+     switch (escolhaDeOrdenacao) {
         case "prioridade":
 
         
@@ -42,13 +41,13 @@ export function ordenador(tarefas,escolha_de_ordenacao){
             gruposPrioridade[prioridade].push(t);
         }
 
-        let listaOrganizadaP = [];
+        let listaOrganizadaPrioridade = [];
 
         for (let grupo of Object.values(gruposPrioridade)) {
-            listaOrganizadaP.push(...grupo); 
+            listaOrganizadaPrioridade.push(...grupo);
         }
 
-        return listaOrganizadaP;
+        return listaOrganizadaPrioridade;
 
 
         case "status":
@@ -66,13 +65,13 @@ export function ordenador(tarefas,escolha_de_ordenacao){
             gruposStatus[status].push(t);
         }
 
-        let listaOrganizadaS = [];
+        let listaOrganizadaStatus = [];
 
         for (let grupo of Object.values(gruposStatus)) {
-            listaOrganizadaS.push(...grupo); 
+            listaOrganizadaStatus.push(...grupo);
         }
 
-        return listaOrganizadaS;
+        return listaOrganizadaStatus;
 
 
 
@@ -95,13 +94,13 @@ export function ordenador(tarefas,escolha_de_ordenacao){
             gruposCategoria[categoria].push(t);
         }
 
-        let listaOrganizadaC = [];
+        let listaOrganizadaCategoria = [];
 
         for (let grupo of Object.values(gruposCategoria)) {
-            listaOrganizadaC.push(...grupo); 
+            listaOrganizadaCategoria.push(...grupo);
         }
 
-        return listaOrganizadaC;
+        return listaOrganizadaCategoria;
 
 
 
@@ -114,15 +113,14 @@ export function ordenador(tarefas,escolha_de_ordenacao){
 
 
 
-
-export function salvar_tarefa(chave,valor){
+export function salvarTarefa(chave, valor){
 
     localStorage.setItem(chave,valor)
 
 }
 
 
-export function capturar_todas_tarefas(){
+export function CapturarTarefas(){
 
     let tarefas = [];
 
@@ -140,27 +138,27 @@ export function capturar_todas_tarefas(){
 }
 
 
-export function editar_tarefa(nova_prioridade,novo_status,novo_alarme,nova_descricao,tarefas){
+export function editarTarefa(nova_prioridade, novo_status, novo_alarme, nova_descricao, tarefas){
    
 
     for (let i=0; i<tarefas.length; i++){
 
-        if (nova_descricao != ""){
+        if (nova_descricao !== ""){
             tarefas[i].descricao = nova_descricao
             
         }
-        if (nova_prioridade != "manter_anterior"){
+        if (nova_prioridade !== "manter_anterior"){
             tarefas[i].prioridade = nova_prioridade
             
         }
 
-        if (novo_status != "manter_anterior"){
+        if (novo_status !== "manter_anterior"){
             tarefas[i].status = novo_status
             
         }           
 
 
-        if (novo_alarme !=""){
+        if (novo_alarme !==""){
             tarefas[i].alarme_escolha = "definido"
             tarefas[i].hora_alarme = novo_alarme
             
@@ -179,10 +177,10 @@ export function editar_tarefa(nova_prioridade,novo_status,novo_alarme,nova_descr
    
 }
 
-export function listar_alarme_a_disparar() {
+export function listarAlarmesParaDisparar() {
 
-    let tarefas = capturar_todas_tarefas();
-    let alarmes_a_disparar = [];
+    let tarefas = CapturarTarefas();
+    let alarmesParaDisparar = [];
 
     let agora = new Date();
 
@@ -198,25 +196,25 @@ export function listar_alarme_a_disparar() {
         );
 
         if (agora >= dataHoraAlarme) {
-            alarmes_a_disparar.push(tarefas[i]);
+            alarmesParaDisparar.push(tarefas[i]);
         }
     }
 
-    return alarmes_a_disparar;
+    return alarmesParaDisparar;
 }
 
 
-export function disparar_alarme(lista_alarmes){
+export function dispararAlarme(listaAlarmes){
    
-    for (let i = 0; i < lista_alarmes.length; i++) {
+    for (let i = 0; i < listaAlarmes.length; i++) {
 
-        alert("Alarme disparado para a tarefa " + lista_alarmes[i].nome);
+        alert("Alarme disparado para a tarefa " + listaAlarmes[i].nome);
 
-        lista_alarmes[i].alarme_escolha = "disparado";
+        listaAlarmes[i].alarme_escolha = "disparado";
 
         localStorage.setItem(
-            lista_alarmes[i].nome,
-            JSON.stringify(lista_alarmes[i])
+            listaAlarmes[i].nome,
+            JSON.stringify(listaAlarmes[i])
         );
     }
 
@@ -225,13 +223,13 @@ export function disparar_alarme(lista_alarmes){
 
 }
 
-export function remover_tarefas(tarefas_a_serem_removidas){
+export function removerTarefas(tarefasParaRemover){
 
     let contador =0
     
-    for (let tarefa in tarefas_a_serem_removidas){
+    for (let tarefa in tarefasParaRemover){
         contador ++
-        localStorage.removeItem(tarefas_a_serem_removidas[tarefa].nome)
+        localStorage.removeItem(tarefasParaRemover[tarefa].nome)
     }
 
     return contador
@@ -243,7 +241,7 @@ export function remover_tarefas(tarefas_a_serem_removidas){
 
 
 
-export function retornar_tarefas_marcadas (marcados) {
+export function capturarTarefasMarcadas (marcados) {
 
     let tarefas = [];
 

@@ -11,7 +11,7 @@ class FileManagerSpec extends Specification {
 
         when: "esse vetor é passado ao contrutor"
 
-        def objeto = FileManager.criador_tarefa(lista)
+        def objeto = FileManager.criadorTarefa(lista)
 
         then:"um objeto tarefa deve ser criado"
 

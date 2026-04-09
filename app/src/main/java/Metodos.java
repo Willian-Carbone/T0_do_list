@@ -11,79 +11,74 @@ public class  Metodos {
 
 
 
-    public static List<tarefa> organizador( ArrayList<tarefa> lista, String opcao){
+    public static List<tarefa> ordenarTarefas(ArrayList<tarefa> lista, String opcao){
        switch (opcao){
 
            case "categoria":
-               Map<String, List<tarefa>> gruposcategoria = new LinkedHashMap<>();
+               Map<String, List<tarefa>> AgrupamentoPorCategoria = new LinkedHashMap<>();
                for (tarefa t: lista){
                    String categoria=t.getCategoria();
-                   gruposcategoria.putIfAbsent(categoria, new ArrayList<>());
-                   gruposcategoria.get(categoria).add(t);
+                   AgrupamentoPorCategoria.putIfAbsent(categoria, new ArrayList<>());
+                   AgrupamentoPorCategoria.get(categoria).add(t);
                }
-               List <tarefa> listaorganizadaC= new ArrayList<>();
-               for (List<tarefa> grupos: gruposcategoria.values()){
-                   listaorganizadaC.addAll(grupos);
+               List <tarefa> listaorganizadaCategoria= new ArrayList<>();
+               for (List<tarefa> grupos: AgrupamentoPorCategoria.values()){
+                   listaorganizadaCategoria.addAll(grupos);
                }
 
-               return listaorganizadaC;
+               return listaorganizadaCategoria;
 
 
            case "status":
-               Map <String, List<tarefa>>grupoStatus = new LinkedHashMap<>();
+               Map <String, List<tarefa>> agrupamentoPorStatus = new LinkedHashMap<>();
                for  (tarefa t: lista){
                    String status = t.getStatus();
-                   grupoStatus.putIfAbsent(status,new ArrayList<>());
-                   grupoStatus.get(status).add(t);
+                   agrupamentoPorStatus.putIfAbsent(status,new ArrayList<>());
+                   agrupamentoPorStatus.get(status).add(t);
 
                }
-               List<tarefa> listaorganizadaS = new ArrayList<>();
-               for (List<tarefa> grupo : grupoStatus.values()){
-                   listaorganizadaS.addAll(grupo);
+               List<tarefa> listaOrganizadaPorStatus = new ArrayList<>();
+               for (List<tarefa> grupo : agrupamentoPorStatus.values()){
+                   listaOrganizadaPorStatus.addAll(grupo);
                }
 
-               return listaorganizadaS;
+               return listaOrganizadaPorStatus;
 
 
 
            case "prioridade":
-               Map <Integer, List<tarefa>> grupos = new TreeMap <> (Collections.reverseOrder());
+               Map <Integer, List<tarefa>> agrupamentoPorPrioridade = new TreeMap <> (Collections.reverseOrder());
                for (tarefa t: lista){
                    int prioridade;
                    prioridade=Integer.parseInt(t.getPrioridade());
-                   grupos.putIfAbsent(prioridade,new ArrayList<>());
-                   grupos.get(prioridade).add(t);
+                   agrupamentoPorPrioridade.putIfAbsent(prioridade,new ArrayList<>());
+                   agrupamentoPorPrioridade.get(prioridade).add(t);
                }
-               List<tarefa> listaorganizadaP = new ArrayList<>();
-               for (List<tarefa> grupo : grupos.values()){
-                   listaorganizadaP.addAll(grupo);
+               List<tarefa> listaOrganizadaPorPrioridade = new ArrayList<>();
+               for (List<tarefa> grupo : agrupamentoPorPrioridade.values()){
+                   listaOrganizadaPorPrioridade.addAll(grupo);
                }
-               return  listaorganizadaP;
+               return  listaOrganizadaPorPrioridade;
 
-
+           default:
+               return List.of();
        }
-        return List.of();
+
     }
 
 
 
     public static Boolean checarmaior(int maior ,int menor){
-        if (maior<menor){
-            return false;
-        }
-
-        else{
-            return true;
-        }
+        return maior >= menor;
     }
 
 
 
-    public static Boolean verificarExistencia(ArrayList<tarefa> tarefas_registradas, String nome){
+    public static Boolean verificarDisponibilidadeNome(ArrayList<tarefa> tarefasRegistradas, String nome){
 
         boolean disponivel=true;
 
-        for (tarefa t: tarefas_registradas){
+        for (tarefa t: tarefasRegistradas){
             if (t.getNome().equals(nome)){
                 disponivel=false;
                 break;
@@ -98,46 +93,29 @@ public class  Metodos {
 
 
 
-    public static Boolean disponibilidadenome( String nome){
-
-        ArrayList<tarefa> tarefas_registradas;
-        tarefas_registradas=FileManager.emitirtarefas();
-        return verificarExistencia(tarefas_registradas,nome);
-
-
-    }
 
 
 
-    public static ArrayList <tarefa> removedor (ArrayList<tarefa> tarefas_registradas, String nome_tarefa){
-        for (tarefa t: tarefas_registradas){
-            if(t.getNome().equals(nome_tarefa)){
-                tarefas_registradas.remove(t);
+
+    public static ArrayList <tarefa> removerTarefa(ArrayList<tarefa> tarefasRegistradas, String nomeTarefa){
+        for (tarefa t: tarefasRegistradas){
+            if(t.getNome().equals(nomeTarefa)){
+                tarefasRegistradas.remove(t);
                 break;
             }
         }
 
-        return tarefas_registradas;
+        return tarefasRegistradas;
     }
 
 
 
 
-
-
-    public static void removertarefa (String nome_tarefa){
-        ArrayList<tarefa> tarefas_registradas = FileManager.emitirtarefas();
-
-        removedor (tarefas_registradas, nome_tarefa);
-
-        FileManager.atualiza_arquivo(tarefas_registradas);
-    }
-
-    public static ArrayList<tarefa> editorTarefa(ArrayList<tarefa> tarefas, String nome_tarefa, String novo_status){
+    public static ArrayList<tarefa> editorTarefa(ArrayList<tarefa> tarefas, String nomeTarefa, String novoStatus){
 
         for (tarefa t: tarefas){
-            if(t.getNome().equals(nome_tarefa)){
-                t.setStatus(novo_status);
+            if(t.getNome().equals(nomeTarefa)){
+                t.setStatus(novoStatus);
                 break;
             }
         }
@@ -149,14 +127,23 @@ public class  Metodos {
 
 
 
+    public static  tarefa criarTarefa(String [] partes){
+
+        return new tarefa(partes[0],partes[1],partes[2],partes[3],partes[4],partes[5],Boolean.parseBoolean(partes[6]),partes[7]);
+    }
 
 
-    public static void editar_status(String novo_status,String nome_tarefa){
-        ArrayList<tarefa> tarefas = FileManager.emitirtarefas();
-
-        tarefas = editorTarefa(tarefas,nome_tarefa,novo_status);
-
-        FileManager.atualiza_arquivo(tarefas);
+    public static String transformarTarefaEmLinha(tarefa t) {
+        return String.join(",",
+                t.getNome(),
+                t.getDescricao(),
+                t.getDatatermino(),
+                t.getCategoria(),
+                t.getStatus(),
+                t.getPrioridade(),
+                String.valueOf(t.getAlarme()),
+                t.getHorario()
+        );
     }
 
 

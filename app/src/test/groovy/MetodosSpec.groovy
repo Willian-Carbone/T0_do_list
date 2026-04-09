@@ -20,12 +20,12 @@ class MetodosSpec extends Specification{
 
         when: "Passando a lista com a opçao de organização selecionada"
 
-        ArrayList<tarefa> OrganizacaoPorcategoria =Metodos.organizador(tarefas,categoria)
-        ArrayList<tarefa>  OrganizacaoPorStatus =Metodos.organizador(tarefas,status)
-        ArrayList<tarefa>  OrganizacaoPorprioridade =Metodos.organizador(tarefas,prioridade)
+        ArrayList<tarefa> OrganizacaoPorcategoria =Metodos.ordenarTarefas(tarefas,categoria)
+        ArrayList<tarefa>  OrganizacaoPorStatus =Metodos.ordenarTarefas(tarefas,status)
+        ArrayList<tarefa>  OrganizacaoPorprioridade =Metodos.ordenarTarefas(tarefas,prioridade)
 
 
-        then: "A lisat deve ser organizada usando como parametro a opção escolhida"
+        then: "A lista deve ser organizada usando como parametro a opção escolhida"
 
         OrganizacaoPorcategoria[0].getCategoria() == OrganizacaoPorcategoria[1].getCategoria()
         OrganizacaoPorStatus[0].getStatus() == OrganizacaoPorStatus[1].getStatus()
@@ -45,9 +45,9 @@ class MetodosSpec extends Specification{
 
         when: "é realizada uma uma pesquisa se o nome esta disponivel"
 
-        Boolean n1 = Metodos.verificarExistencia(lista,"exemplo")
-        Boolean n2 = Metodos.verificarExistencia(lista,"exemplo2")
-        Boolean n3 = Metodos.verificarExistencia(lista,"exemplo3")
+        Boolean n1 = Metodos.verificarDisponibilidadeNome(lista,"exemplo")
+        Boolean n2 = Metodos.verificarDisponibilidadeNome(lista,"exemplo2")
+        Boolean n3 = Metodos.verificarDisponibilidadeNome(lista,"exemplo3")
 
         then:
 
@@ -69,7 +69,7 @@ class MetodosSpec extends Specification{
 
         when: "é informado o nome da tarefa que quer ser removida"
 
-        lista = Metodos.removedor(lista, "exemplo")
+        lista = Metodos.removerTarefa(lista, "exemplo")
 
         then: "a tarefa especificada é removida"
 
